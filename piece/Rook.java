@@ -11,12 +11,17 @@ public class Rook extends Piece{
 
    @Override
    public boolean isValidMove(char xPos, int yPos) {
-      if(((xPos == this.xPos) && (yPos != this.yPos)) || ((xPos != this.xPos) && (yPos == this.yPos))) {
-         return true;
+      // TODO: return false if the position it is trying to check is already taken by the same color, 
+      // if position taken by piece of different color, return true and somehow stop the operation
+      return (((xPos == this.xPos) && (yPos != this.yPos)) || ((xPos != this.xPos) && (yPos == this.yPos)));
+   }
+   @Override
+   public String pieceToString() {
+      if(isAlive) {
+         return "Rook " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
-
-      // TODO: return false if the position it is trying to check is already taken by the same color, if position taken by piece of different color, return true and somehow stop the operation
-      
-      return true;
+      else {
+         return "Rook " + isWhite + " " + isAlive;
+      }
    }
 }

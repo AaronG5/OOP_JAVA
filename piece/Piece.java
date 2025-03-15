@@ -61,9 +61,7 @@ abstract class Piece {
       }
       return 0;
    }
-
-   public abstract boolean isValidMove(char xPos, int yPos);
-
+   
    public void captured() {
       setIsAlive(false);
       --livePieceCount;
@@ -81,13 +79,8 @@ abstract class Piece {
       setyPos(yPos);
    }
 
-   public void println() {
-      if(isAlive) {
-         System.out.println(isWhite + " " + isAlive + " " + xPos + " " + yPos);
-      }
-      else {
-         System.out.println(isWhite + " " + isAlive);
-      }
-   }
+   public abstract boolean isValidMove(char xPos, int yPos);
+
+   public abstract String pieceToString();
 }
 
