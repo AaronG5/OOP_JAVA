@@ -2,10 +2,10 @@ package piece;
 
 abstract class Piece {
    private static int livePieceCount = 0;
-   protected final boolean isWhite;
-   protected boolean isAlive = false;
-   protected char xPos;
-   protected int yPos;
+   private final boolean isWhite;
+   private boolean isAlive = false;
+   private char xPos;
+   private int yPos;
 
    public Piece(boolean isWhite) {
       this.isWhite = isWhite;
@@ -19,10 +19,10 @@ abstract class Piece {
       setIsAlive(true);
    }
 
-   private void setIsAlive(boolean isAlive) {
+   protected final void setIsAlive(boolean isAlive) {
       this.isAlive = isAlive;
    }
-   private void setxPos(char xPos) { // Change to abstract maybe
+   protected final void setxPos(char xPos) {
       Character.toLowerCase(xPos);
       if(xPos >= 'a' && xPos <= 'h') {
          this.xPos = xPos;
@@ -31,7 +31,7 @@ abstract class Piece {
          System.out.println("Error, invalid coordinate value.\n");
       }
    }
-   private void setyPos(int yPos) { // Change to abstract maybe
+   protected final void setyPos(int yPos) {
       if(yPos > 0 && yPos < 9) {
          this.yPos = yPos;
       }
@@ -66,17 +66,17 @@ abstract class Piece {
       setIsAlive(false);
       --livePieceCount;
    }
-   public void move(char xPos, int yPos) {
-      if(isValidMove(xPos, yPos)) {
-         setxPos(xPos);
-         setyPos(yPos);
+   public void move(char targetXPos, int targetYPos) {
+      if(isValidMove(targetXPos, targetYPos)) {
+         setxPos(targetXPos);
+         setyPos(targetYPos);
       }
    }
-   public void move(char xPos) {
-      setxPos(xPos);
+   public void move(char targetXPos) {
+      setxPos(targetXPos);
    }
-   public void move(int yPos) {
-      setyPos(yPos);
+   public void move(int targetYPos) {
+      setyPos(targetYPos);
    }
 
    public abstract boolean isValidMove(char xPos, int yPos);
