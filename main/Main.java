@@ -1,7 +1,6 @@
 package main;
 
 import javax.swing.JFrame;
-import piece.*;
 
 public class Main {
    public static void main(String[] args) {
@@ -16,12 +15,15 @@ public class Main {
       window.setLocationRelativeTo(null);
       window.setVisible(true);
 
-      Rook whiteRook = new Rook(true, 'b', 7);
-      System.out.println(whiteRook.pieceToString());
-      System.out.println(whiteRook.isValidMove('b', 1));
+      game.launchGame();
 
-      Bishop whiteBishop = new Bishop(true, 'a', 1);
-      System.out.println(whiteBishop.pieceToString());
-      System.out.println(whiteBishop.isValidMove('b', 2));
+
+      // Rook whiteRook = new Rook(true, 'b', 7);
+      // System.out.println(whiteRook.pieceToString());
+      // System.out.println(whiteRook.isValidMove('b', 1));
+
+      // Bishop whiteBishop = new Bishop(true, 'a', 1);
+      // System.out.println(whiteBishop.pieceToString());
+      // System.out.println(whiteBishop.isValidMove('b', 2));
    }
 }
