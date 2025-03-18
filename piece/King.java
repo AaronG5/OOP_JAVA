@@ -1,7 +1,8 @@
 package piece;
 
 public class King extends Piece{
-   
+   private boolean isFirstMove = true;
+
    public King(boolean isWhite) {
       super(isWhite);
    }
@@ -9,26 +10,40 @@ public class King extends Piece{
       super(isWhite, xPos, yPos);
    }
 
-   public boolean canCastle() {
+   public void Castle() {
       // Let rook and king exchange positions if none of them moved and there is free space between them
-      return true;
+      if(isFirstMove) {
+         if(isWhite) {
+            super.move('c', 1);
+         }
+         else {
+            super.move('c', 8);
+         }
+         isFirstMove = false;
+      }
    }
 
-   public void gameOver() {
-      System.out.println("Game Over!\n" + (getIsWhite() ? "Black" : "White") + " wins!");
+   public String gameOver() {
+      return "Game Over!\n" + (isWhite ? "Black" : "White") + " wins!";
    }
 
    @Override
    public boolean isValidMove(char targetXPos, int targetYPos) {
-      return ((Math.abs(targetXPos - getxPos()) == 1) || (Math.abs(targetYPos - getyPos()) == 1));
+      if((Math.abs(targetXPos - xPos) == 1) || (Math.abs(targetYPos - yPos) == 1)) {
+         isFirstMove = false;
+         return true;
+      }
+      else {
+         return false;
+      }
    }
    @Override
    public String pieceToString() {
-      if(getIsAlive()) {
-         return "King " + getIsWhite() + " " + getIsAlive() + " " + getxPos() + " " + getyPos();
+      if(isAlive) {
+         return "King " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
       else {
-         return "King " + getIsWhite() + " " + getIsAlive();
+         return "King " + isWhite + " " + isAlive;
       }
    }
 }

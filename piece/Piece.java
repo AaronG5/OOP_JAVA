@@ -1,48 +1,47 @@
 package piece;
 
-abstract class Piece {
-   private static int livePieceCount = 0;
-   private final boolean isWhite;
-   private boolean isAlive = false;
-   private char xPos;
-   private int yPos;
+class Piece {
+   protected final boolean isWhite;
+   protected boolean isAlive = false;
+   protected char xPos;
+   protected int yPos;
 
    public Piece(boolean isWhite) {
       this.isWhite = isWhite;
-      ++livePieceCount;
    }
 
    public Piece(boolean isWhite, char xPos, int yPos) {
       this(isWhite);
-      setxPos(xPos);
-      setyPos(yPos);
-      setIsAlive(true);
+      if(setxPos(xPos) && setyPos(yPos)) {
+         setIsAlive(true);
+      }
    }
 
    protected final void setIsAlive(boolean isAlive) {
       this.isAlive = isAlive;
    }
-   protected final void setxPos(char xPos) {
+   protected final boolean setxPos(char xPos) {
       Character.toLowerCase(xPos);
       if(xPos >= 'a' && xPos <= 'h') {
          this.xPos = xPos;
+         return true;
       }
       else {
-         System.out.println("Error, invalid coordinate value.\n");
+         //System.out.println("Error, invalid coordinate value.\n");
+         return false;
       }
    }
-   protected final void setyPos(int yPos) {
+   protected final boolean setyPos(int yPos) {
       if(yPos > 0 && yPos < 9) {
          this.yPos = yPos;
+         return true;
       }
       else {
-         System.out.println("Error, invalid coordinate value.\n");
+         //System.out.println("Error, invalid coordinate value.\n");
+         return false;
       }
    }
    
-   public static int getLivePieceCount() {
-      return livePieceCount;
-   }
    public boolean getIsWhite() {
       return isWhite;
    }
@@ -64,7 +63,6 @@ abstract class Piece {
    
    public void captured() {
       setIsAlive(false);
-      --livePieceCount;
    }
    public void move(char targetXPos, int targetYPos) {
       if(isValidMove(targetXPos, targetYPos)) {
@@ -72,15 +70,17 @@ abstract class Piece {
          setyPos(targetYPos);
       }
    }
-   public void move(char targetXPos) {
-      setxPos(targetXPos);
-   }
-   public void move(int targetYPos) {
-      setyPos(targetYPos);
-   }
 
-   public abstract boolean isValidMove(char xPos, int yPos);
-
-   public abstract String pieceToString();
+   public boolean isValidMove(char targetXPos, int targetYPos) {   
+      return (((targetXPos == xPos) && (targetYPos != yPos)) || ((targetXPos != xPos) && (targetYPos == yPos)));
+   }
+   
+   public String pieceToString() {
+      if(isAlive) {
+         return "Piece " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+      }
+      else {
+         return "Piece " + isWhite + " " + isAlive;
+      }
+   }
 }
-

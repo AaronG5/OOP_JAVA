@@ -1,6 +1,6 @@
 package piece;
 
-public class Bishop extends Piece{
+public class Bishop extends Piece {
    
    public Bishop(boolean isWhite) {
       super(isWhite);
@@ -11,15 +11,15 @@ public class Bishop extends Piece{
 
    @Override
    public boolean isValidMove(char targetXPos, int targetYPos) {
-      return (Math.abs(targetXPos - getxPos()) == Math.abs(targetYPos - getyPos()));
+      return (Math.abs(targetXPos - xPos) == Math.abs(targetYPos - yPos));
    }
    @Override
    public String pieceToString() {
-      if(getIsAlive()) {
-         return "Bishop " + getIsWhite() + " " + getIsAlive() + " " + getxPos() + " " + getyPos();
+      if(isAlive) {
+         return "Bishop " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
       else {
-         return "Bishop " + getIsWhite() + " " + getIsAlive();
+         return "Bishop " + isWhite + " " + isAlive;
       }
    }
 }

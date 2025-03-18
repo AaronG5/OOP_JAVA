@@ -11,15 +11,15 @@ public class Knight extends Piece {
 
    @Override
    public boolean isValidMove(char targetXPos, int targetYPos) {
-      return (Math.abs(targetXPos - getxPos()) * Math.abs(targetYPos - getyPos()) == 2);
+      return (Math.abs(targetXPos - xPos) * Math.abs(targetYPos - yPos) == 2);
    }
    @Override
    public String pieceToString() {
-      if(getIsAlive()) {
-         return "Knight " + getIsWhite() + " " + getIsAlive() + " " + getxPos() + " " + getyPos();
+      if(isAlive) {
+         return "Knight " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
       else {
-         return "Knight " + getIsWhite() + " " + getIsAlive();
+         return "Knight " + isWhite + " " + isAlive;
       }
    }
 }

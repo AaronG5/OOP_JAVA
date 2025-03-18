@@ -21,11 +21,11 @@ public class Pawn extends Piece{
 
    @Override
    public boolean isValidMove(char targetXPos, int targetYPos) {
-      if(isFirstMove && (Math.abs(targetYPos - getyPos()) == 2)) {
+      if(isFirstMove && (Math.abs(targetYPos - yPos) == 2)) {
          isFirstMove = false;
          return true;
       }
-      else if(Math.abs(targetYPos - getyPos()) == 1) {
+      else if(Math.abs(targetYPos - yPos) == 1) {
          if(isFirstMove) {
             isFirstMove = false;
          }
@@ -38,11 +38,11 @@ public class Pawn extends Piece{
    }
    @Override
    public String pieceToString() {
-      if(getIsAlive()) {
-         return "Pawn " + getIsWhite() + " " + getIsAlive() + " " + getxPos() + " " + getyPos();
+      if(isAlive) {
+         return "Pawn " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
       else {
-         return "Pawn " + getIsWhite() + " " + getIsAlive();
+         return "Pawn " + isWhite + " " + isAlive;
       }
    }
    @Override
@@ -51,7 +51,7 @@ public class Pawn extends Piece{
          setxPos(targetXPos);
          setyPos(targetYPos);
       }
-      if(getyPos() == (getIsWhite() ? 8 : 1)) {
+      if(yPos == (isWhite ? 8 : 1)) {
          promote();
       }
    }

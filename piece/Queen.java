@@ -11,15 +11,15 @@ public class Queen extends Piece{
 
    @Override
    public boolean isValidMove(char targetXPos, int targetYPos) {
-      return ((Math.abs(targetXPos - getxPos()) == Math.abs(targetYPos - getyPos())) || ((targetXPos == getxPos()) && (targetYPos != getyPos())) || ((targetXPos != getxPos()) && (targetYPos == getyPos())));
+      return ((Math.abs(targetXPos - xPos) == Math.abs(targetYPos - yPos)) || ((targetXPos == xPos) && (targetYPos != yPos)) || ((targetXPos != xPos) && (targetYPos == yPos)));
    }
    @Override
    public String pieceToString() {
-      if(getIsAlive()) {
-         return "Queen " + getIsWhite() + " " + getIsAlive() + " " + getxPos() + " " + getyPos();
+      if(isAlive) {
+         return "Queen " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
       }
       else {
-         return "Queen " + getIsWhite() + " " + getIsAlive();
+         return "Queen " + isWhite + " " + isAlive;
       }
    }
 }
