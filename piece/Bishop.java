@@ -1,25 +1,31 @@
-package piece;
+package chess.piece;
+
+import chess.exceptions.OutOfBoundsException;
 
 public class Bishop extends Piece {
-   
-   public Bishop(boolean isWhite) {
-      super(isWhite);
-   }
-   public Bishop(boolean isWhite, char xPos, int yPos) {
-      super(isWhite, xPos, yPos);
+
+   public Bishop(boolean isWhite, int col, int row) {
+      super(isWhite, col, row);
+
+      if(isWhite) { image = getImage("/w_bishop.png"); }
+      else { image = getImage("/b_bishop.png"); }
    }
 
    @Override
-   public boolean isValidMove(char targetXPos, int targetYPos) {
-      return (Math.abs(targetXPos - xPos) == Math.abs(targetYPos - yPos));
+   public String getType() {
+      return "Bishop";
    }
    @Override
-   public String pieceToString() {
+   public boolean isValidMove(int targetX, int targetY) {
+      return (Math.abs(targetX - x) == Math.abs(targetY - y));
+   }
+   @Override
+   public String toString() {
       if(isAlive) {
-         return "Bishop " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+         return "Bishop " + isWhite + " " + isAlive + " " + x + " " + y + "\n";
       }
       else {
-         return "Bishop " + isWhite + " " + isAlive;
+         return "Bishop " + isWhite + " " + isAlive + "\n";
       }
    }
 }

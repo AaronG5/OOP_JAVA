@@ -1,22 +1,24 @@
-package piece;
+package chess.piece;
 
 public class Queen extends Piece{
-   
-   public Queen(boolean isWhite) {
-      super(isWhite);
-   }
-   public Queen(boolean isWhite, char xPos, int yPos) {
-      super(isWhite, xPos, yPos);
+
+   public Queen(boolean isWhite, int col, int row) {
+      super(isWhite, col, row);
+
+      if(isWhite) { image = getImage("/w_queen.png"); }
+      else { image = getImage("/b_queen.png"); }
    }
 
    @Override
-   public boolean isValidMove(char targetXPos, int targetYPos) {
-      return ((Math.abs(targetXPos - xPos) == Math.abs(targetYPos - yPos)) || ((targetXPos == xPos) && (targetYPos != yPos)) || ((targetXPos != xPos) && (targetYPos == yPos)));
+   public String getType() { return "Queen"; }
+   @Override
+   public boolean isValidMove(int targetX, int targetY) {
+      return ((Math.abs(targetX - x) == Math.abs(targetY - y)) || ((targetX == x) && (targetY != y)) || ((targetX != x) && (targetY == y)));
    }
    @Override
-   public String pieceToString() {
+   public String toString() {
       if(isAlive) {
-         return "Queen " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+         return "Queen " + isWhite + " " + isAlive + " " + x + " " + y;
       }
       else {
          return "Queen " + isWhite + " " + isAlive;

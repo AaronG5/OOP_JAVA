@@ -1,34 +1,36 @@
-package piece;
+package chess.piece;
 
 public class Rook extends Piece{
    
    private boolean isFirstMove = true;
 
-   public Rook(boolean isWhite) {
-      super(isWhite);
-   }
-   public Rook(boolean isWhite, char xPos, int yPos) {
-      super(isWhite, xPos, yPos);
+   public Rook(boolean isWhite, int col, int row) {
+      super(isWhite, col, row);
+
+      if(isWhite) { image = getImage("/w_rook.png"); }
+      else { image = getImage("/b_rook.png"); }
    }
 
-   public void Castle() {
-      // Let rook and king exchange positions if none of them moved and there is free space between them
-      if(isFirstMove) {
-         if(isWhite) {
-            super.move('d', 1);
-         }
-         else {
-            super.move('d', 8);
-         }
-         isFirstMove = false;
-      }
-   }
+//   public void castle() {
+//      // Let rook and king exchange positions if none of them moved and there is free space between them
+//      if(isFirstMove) {
+//         if(isWhite) {
+//            super.move('d', 1);
+//         }
+//         else {
+//            super.move('d', 8);
+//         }
+//         isFirstMove = false;
+//      }
+//   }
 
    @Override
-   public boolean isValidMove(char targetXPos, int targetYPos) {
+   public String getType() { return "Rook"; }
+   @Override
+   public boolean isValidMove(int targetX, int targetY) {
       // TODO: return false if the position it is trying to check is already taken by the same color, 
       // if position taken by piece of different color, return true and somehow stop the operation
-      if(((targetXPos == xPos) && (targetYPos != yPos)) || ((targetXPos != xPos) && (targetYPos == yPos))) {
+      if(((targetX == x) && (targetY != y)) || ((targetX != x) && (targetY == y))) {
          isFirstMove = false;
          return true;
       }
@@ -37,9 +39,9 @@ public class Rook extends Piece{
       }
    }
    @Override
-   public String pieceToString() {
+   public String toString() {
       if(isAlive) {
-         return "Rook " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+         return "Rook " + isWhite + " " + isAlive + " " + x + " " + y;
       }
       else {
          return "Rook " + isWhite + " " + isAlive;

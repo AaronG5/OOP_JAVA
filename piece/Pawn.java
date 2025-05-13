@@ -1,31 +1,35 @@
-package piece;
+package chess.piece;
 
-public class Pawn extends Piece{
+import chess.exceptions.OutOfBoundsException;
+
+public class Pawn extends Piece {
    
    private boolean isFirstMove = true;
 
-   public Pawn(boolean isWhite) {
-      super(isWhite);
-   }
-   public Pawn(boolean isWhite, char xPos, int yPos) {
-      super(isWhite, xPos, yPos);
-   }
+   public Pawn(boolean isWhite, int col, int row) {
+      super(isWhite, col, row);
 
-   public void promote() {
-      // TODO: make pawn be able to convert into other piece
+      if(isWhite) { image = getImage("/w_pawn.png"); }
+      else { image = getImage("/b_pawn.png"); }
    }
-   public void enPassant() {
-      // TODO: make pawn be able to en passant
-   }
-
 
    @Override
-   public boolean isValidMove(char targetXPos, int targetYPos) {
-      if(isFirstMove && (Math.abs(targetYPos - yPos) == 2)) {
+   public String getType() {
+      return "Pawn";
+   }
+   @Override
+   public boolean isValidMove(int targetX, int targetY) {
+      if(isFirstMove && (Math.abs(targetY - y) == 2)) {
          isFirstMove = false;
          return true;
       }
-      else if(Math.abs(targetYPos - yPos) == 1) {
+      else if(Math.abs(targetY - y) == 1) {
+         if(isFirstMove) {
+            isFirstMove = false;
+         }
+         return true;
+      }
+      else if(Math.abs(targetX - x) + Math.abs(targetY - y) == 2) {
          if(isFirstMove) {
             isFirstMove = false;
          }
@@ -34,25 +38,14 @@ public class Pawn extends Piece{
       else {
          return false;
       }
-      // TODO: Add condition to check if an enemy piece is sitting diagonaly next to pawn
    }
    @Override
-   public String pieceToString() {
+   public String toString() {
       if(isAlive) {
-         return "Pawn " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+         return "Pawn " + isWhite + " " + isAlive + " " + x + " " + y + "\n";
       }
       else {
-         return "Pawn " + isWhite + " " + isAlive;
-      }
-   }
-   @Override
-   public void move(char targetXPos, int targetYPos) {
-      if(isValidMove(targetXPos, targetYPos)) {
-         setxPos(targetXPos);
-         setyPos(targetYPos);
-      }
-      if(yPos == (isWhite ? 8 : 1)) {
-         promote();
+         return "Pawn " + isWhite + " " + isAlive + "\n";
       }
    }
 }

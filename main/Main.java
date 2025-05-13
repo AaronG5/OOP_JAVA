@@ -1,7 +1,9 @@
-package main;
+package chess.main;
+
+import chess.exceptions.OutOfBoundsException;
+import chess.piece.*;
 
 import javax.swing.JFrame;
-import piece.*;
 
 public class Main {
    public static void main(String[] args) {
@@ -18,13 +20,30 @@ public class Main {
 
       game.launchGame();
 
+//      try {
+//         Pawn whitePawn1 = new Pawn(true, 'a', 1);
 
-      Rook whiteRook = new Rook(true, 'b', 7);
-      System.out.println(whiteRook.pieceToString());
-      System.out.println(whiteRook.isValidMove('b', 1));
+         // Factory method
+//         BishopFactory bFactory = new BishopFactory();
+//         PawnFactory pFactory = new PawnFactory();
+//
+//         Bishop whiteBishop2 = bFactory.createPiece(true, 'c', 6);
+//         Pawn blackPawn1 = pFactory.createPiece(true, 'a', 2);
+//
+//
+//         System.out.println(whiteBishop2.toString());
+//         System.out.println(blackPawn1.toString());
+//
+//         whiteBishop2.move('d', 7);
+         // ---
 
-      Bishop whiteBishop = new Bishop(true, 'a', 1);
-      System.out.println(whiteBishop.pieceToString());
-      System.out.println(whiteBishop.isValidMove('b', 2));
+
+//         Movable blackPawn = new Pawn(false, 'a', 2);
+//      } catch (OutOfBoundsException e) {
+//         System.out.println(e.getMessage());
+//         System.out.println(e.getInfo());
+//      } catch (NullPointerException | IllegalArgumentException e) {
+//         System.out.println(e.getMessage());
+//      }
    }
 }

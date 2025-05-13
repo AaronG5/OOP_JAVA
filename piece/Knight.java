@@ -1,22 +1,24 @@
-package piece;
+package chess.piece;
 
 public class Knight extends Piece {
-   
-   public Knight(boolean isWhite) {
-      super(isWhite);
-   }
-   public Knight(boolean isWhite, char xPos, int yPos) {
-      super(isWhite, xPos, yPos);
+
+   public Knight(boolean isWhite, int col, int row) {
+      super(isWhite, col, row);
+
+      if(isWhite) { image = getImage("/w_knight.png"); }
+      else { image = getImage("/b_knight.png"); }
    }
 
    @Override
-   public boolean isValidMove(char targetXPos, int targetYPos) {
-      return (Math.abs(targetXPos - xPos) * Math.abs(targetYPos - yPos) == 2);
+   public String getType() { return "Knight"; }
+   @Override
+   public boolean isValidMove(int targetX, int targetY) {
+      return (Math.abs(targetX - x) * Math.abs(targetY - y) == 2);
    }
    @Override
-   public String pieceToString() {
+   public String toString() {
       if(isAlive) {
-         return "Knight " + isWhite + " " + isAlive + " " + xPos + " " + yPos;
+         return "Knight " + isWhite + " " + isAlive + " " + x + " " + y;
       }
       else {
          return "Knight " + isWhite + " " + isAlive;
